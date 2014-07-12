@@ -14,7 +14,17 @@ namespace StringCalculator
                 return 0;
             }
 
-            return numbers.Sum(n => Convert.ToInt32(n));
+            return numbers.Sum(n => Convert.ToInt32(ValidateNumberIsNotNegative(n)));
+        }
+
+        private string ValidateNumberIsNotNegative(string number)
+        {
+            if (number.StartsWith("-"))
+            {
+                throw new Exception(String.Format("Negatives not allowed: {0}", number));
+            }
+
+            return number;
         }
     }
 }
