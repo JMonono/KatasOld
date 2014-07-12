@@ -7,7 +7,6 @@ namespace StringCalculator.Tests
     public class StringCalculatorTests
     {
         private INumberArrayTotaler _defaultTotaler = new NumberArrayTotaler();
-        private INumberStringParser _defaultParser = new NewlineNumberStringParser(new NumberStringParser());
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -15,16 +14,7 @@ namespace StringCalculator.Tests
         {
             // Arrange
             INumberArrayTotaler totaler = null;
-            var calculator = new StringCalculator(numberParser: _defaultParser, numberTotaler: totaler);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void RequiresNumberParserOnInitialise()
-        {
-            // Arrange
-            INumberStringParser parser = null;
-            var calculator = new StringCalculator(numberParser: parser, numberTotaler: _defaultTotaler);
+            var calculator = new StringCalculator(numberTotaler: totaler);
         }
 
         [TestMethod]
@@ -32,7 +22,7 @@ namespace StringCalculator.Tests
         {
             // Arrange
             int expected = 0;
-            var calculator = new StringCalculator(numberParser: _defaultParser, numberTotaler: _defaultTotaler);
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
             string numbers = String.Empty;
 
             // Act
@@ -47,7 +37,7 @@ namespace StringCalculator.Tests
         {
             // Arrange
             var expected = 4;
-            var calculator = new StringCalculator(numberParser: _defaultParser, numberTotaler: _defaultTotaler);
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
             string numbers = expected.ToString();
 
             // Act
@@ -62,7 +52,7 @@ namespace StringCalculator.Tests
         {
             // Arrange
             var expected = 5;
-            var calculator = new StringCalculator(numberParser: _defaultParser, numberTotaler: _defaultTotaler);
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
             string numbers = "2,3";
 
             // Act
@@ -77,7 +67,7 @@ namespace StringCalculator.Tests
         {
             // Arrange
             var expected = 11;
-            var calculator = new StringCalculator(numberParser: _defaultParser, numberTotaler: _defaultTotaler);
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
             string numbers = "4,7";
 
             // Act
@@ -92,7 +82,7 @@ namespace StringCalculator.Tests
         {
             // Arrange
             var expected = 9;
-            var calculator = new StringCalculator(numberParser: _defaultParser, numberTotaler: _defaultTotaler);
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
             string numbers = "2,3,4";
 
             // Act
@@ -107,7 +97,7 @@ namespace StringCalculator.Tests
         {
             // Arrange
             var expected = 5;
-            var calculator = new StringCalculator(numberParser: _defaultParser, numberTotaler: _defaultTotaler);
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
             string numbers = String.Format("2{0}3", Environment.NewLine);
 
             // Act
@@ -122,7 +112,7 @@ namespace StringCalculator.Tests
         {
             // Arrange
             var expected = 9;
-            var calculator = new StringCalculator(numberParser: _defaultParser, numberTotaler: _defaultTotaler);
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
             string numbers = String.Format("2{0}3{0}4", "\n", ",");
 
             // Act
@@ -137,7 +127,7 @@ namespace StringCalculator.Tests
         {
             // Arrange
             var expected = 9;
-            var calculator = new StringCalculator(numberParser: _defaultParser, numberTotaler: _defaultTotaler);
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
             string delimiter = "-";
             string numbers =
                 String.Format("\\{0}{1}2{2}3{3}4", delimiter, "\n", delimiter, delimiter);
