@@ -110,5 +110,27 @@ namespace StringCalculator.Tests
             // Assert
             Assert.AreEqual(expected.Message, actual.Message);
         }
+
+        [TestMethod]
+        public void TotalWithArrayContainingMinusOneTwoMinusThreeThrowsException()
+        {
+            // Arrange
+            Exception expected = new Exception("Negatives not allowed: -1,-3");
+            Exception actual = null;
+            var totaler = new NumberArrayTotaler();
+
+            // Act
+            try
+            {
+                var result = totaler.Total(new string[] { "-1", "2", "-3" });
+            }
+            catch (Exception ex)
+            {
+                actual = ex;
+            }
+
+            // Assert
+            Assert.AreEqual(expected.Message, actual.Message);
+        }
     }
 }

@@ -14,17 +14,21 @@ namespace StringCalculator
                 return 0;
             }
 
-            return numbers.Sum(n => Convert.ToInt32(ValidateNumberIsNotNegative(n)));
+            ValidateNegativeNumbersDoNotExist(numbers);
+
+            return numbers.Sum(n => String.IsNullOrWhiteSpace(n) ? 0 : Convert.ToInt32(n));
         }
 
-        private string ValidateNumberIsNotNegative(string number)
+        private void ValidateNegativeNumbersDoNotExist(string[] numbers)
         {
-            if (number.StartsWith("-"))
-            {
-                throw new Exception(String.Format("Negatives not allowed: {0}", number));
-            }
+            var negativeNumbers = numbers.Where(num => num.StartsWith("-"))
+                                         .Select(num => num).ToArray();
 
-            return number;
+            if (negativeNumbers != null && negativeNumbers.Length > 0)
+            {
+                throw new Exception(String.Format("Negatives not allowed: {0}",
+                                    String.Join(",", negativeNumbers)));
+            }
         }
     }
 }

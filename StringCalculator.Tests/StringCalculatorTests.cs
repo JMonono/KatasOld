@@ -113,7 +113,7 @@ namespace StringCalculator.Tests
             // Arrange
             var expected = 9;
             var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
-            string numbers = String.Format("2{0}3{0}4", "\n", ",");
+            string numbers = String.Format("2{0}3{1}4", "\n", ",");
 
             // Act
             int actual = calculator.Add(numbersToAdd: numbers);
@@ -137,6 +137,20 @@ namespace StringCalculator.Tests
 
             // Assert
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void AddTwoCommaMinusThreeThrowsException()
+        {
+            // Arrange
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
+            string numbers = String.Format("2{0}{1}3", ",", "-");
+
+            // Act
+            int actual = calculator.Add(numbersToAdd: numbers);
+
+            // Assert
         }
     }
 }
