@@ -39,6 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INumberArrayTotaler.cs" />
+    <Compile Include="INumberStringParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NewlineNumberStringParser.cs" />
+    <Compile Include="NumberArrayTotaler.cs" />
+    <Compile Include="NumberStringParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StringCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -50,8 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="NumberStringParserTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StringCalculatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NumberArrayTotalerTests.cs" />
+    <Compile Include="NewlineNumberStringParserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StringCalculator\StringCalculator.csproj">

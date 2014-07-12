@@ -8,21 +8,53 @@ namespace StringCalculator
 {
     public class StringCalculator
     {
-        public int Add(string numbersToAdd)
+        private readonly string _CUSTOM_DELIMITER_PATTERN = "\\";
+        private readonly int _CUSTOM_DELIMITER_PLUS_ONE_INDEX = 3;
+        private INumberArrayTotaler _numberTotaler;
+        private INumberStringParser _numberParser;
+
+        public StringCalculator(INumberStringParser numberParser, INumberArrayTotaler numberTotaler)
         {
-            int total = 0;
-
-            if (!String.IsNullOrWhiteSpace(numbersToAdd))
+            if (numberParser == null)
             {
-                string[] splitNumbers = numbersToAdd.Split(',', '\n');
-
-                foreach (var item in splitNumbers)
-                {
-                    total += Convert.ToInt32(item);
-                }
+                throw new ArgumentNullException("numberParser");
             }
 
-            return total;
+            if (numberTotaler == null)
+            {
+                throw new ArgumentNullException("numberTotaler");
+            }
+
+            // TODO: Complete member initialization
+            this._numberParser = numberParser;
+            this._numberTotaler = numberTotaler;
+        }
+
+        public int Add(string numbersToAdd)
+        {
+            string[] splitNumbers = null;
+            char customDelimiter;
+
+            // Guard for empty string
+            if (String.IsNullOrWhiteSpace(numbersToAdd))
+                return 0;
+
+            // parse numbers
+            if (numbersToAdd.StartsWith(_CUSTOM_DELIMITER_PATTERN))
+            {
+                customDelimiter = numbersToAdd.ToCharArray(1, 1)[0];
+                numbersToAdd = numbersToAdd.Substring(_CUSTOM_DELIMITER_PLUS_ONE_INDEX);
+
+                splitNumbers = _numberParser.Parse(numberString: numbersToAdd,
+                                               additionalDelimiters: new List<char>() { customDelimiter });
+            }
+            else
+            {
+                // sum numbers
+                splitNumbers = _numberParser.Parse(numberString: numbersToAdd);
+            }
+
+            return _numberTotaler.Total(splitNumbers);
         }
     }
 }
