@@ -16,7 +16,7 @@ namespace StringCalculator
 
             ValidateNegativeNumbersDoNotExist(numbers);
 
-            return numbers.Sum(n => String.IsNullOrWhiteSpace(n) ? 0 : Convert.ToInt32(n));
+            return numbers.Sum(n => String.IsNullOrWhiteSpace(n) ? 0 : ParseStringToInteger(n));
         }
 
         private void ValidateNegativeNumbersDoNotExist(string[] numbers)
@@ -29,6 +29,13 @@ namespace StringCalculator
                 throw new Exception(String.Format("Negatives not allowed: {0}",
                                     String.Join(",", negativeNumbers)));
             }
+        }
+
+        private int ParseStringToInteger(string number)
+        {
+            int parsedValue = Convert.ToInt32(number);
+
+            return parsedValue > 1000 ? 0 : parsedValue;
         }
     }
 }

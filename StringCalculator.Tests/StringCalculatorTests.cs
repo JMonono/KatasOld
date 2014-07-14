@@ -152,5 +152,20 @@ namespace StringCalculator.Tests
 
             // Assert
         }
+
+        [TestMethod]
+        public void AddTwoCommaOneThousandAndOneReturnsTwo()
+        {
+            // Arrange
+            var expected = 2;
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
+            string numbers = String.Format("2{0}1001", ",");
+
+            // Act
+            int actual = calculator.Add(numbersToAdd: numbers);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

@@ -132,5 +132,33 @@ namespace StringCalculator.Tests
             // Assert
             Assert.AreEqual(expected.Message, actual.Message);
         }
+
+        [TestMethod]
+        public void TotalWithArrayContainingOneAndOneThousandReturnsOneThousandAndOne()
+        {
+            // Arrange
+            var expected = 1001;
+            var totaler = new NumberArrayTotaler();
+
+            // Act
+            var actual = totaler.Total(new string[] { "1", "1000" });
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TotalWithArrayContainingOneAndOneThousandAndOneReturnsOne()
+        {
+            // Arrange
+            var expected = 1;
+            var totaler = new NumberArrayTotaler();
+
+            // Act
+            var actual = totaler.Total(new string[] { "1", "1001" });
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
