@@ -167,5 +167,22 @@ namespace StringCalculator.Tests
             // Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void AddTwoLongDelimiterThreeLongDelimiterFourReturnsNine()
+        {
+            // Arrange
+            var expected = 9;
+            var calculator = new StringCalculator(numberTotaler: _defaultTotaler);
+            string delimiter = "[***]";
+            string numbers =
+                String.Format("\\{0}{1}2{2}3{3}4", delimiter, "\n", delimiter, delimiter);
+
+            // Act
+            int actual = calculator.Add(numbersToAdd: numbers);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

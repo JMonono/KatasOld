@@ -9,7 +9,6 @@ namespace StringCalculator
     public class StringCalculator
     {
         private readonly string _CUSTOM_DELIMITER_PATTERN = "\\";
-        private readonly int _CUSTOM_DELIMITER_PLUS_ONE_INDEX = 3;
         private INumberArrayTotaler _numberTotaler;
 
         public StringCalculator(INumberArrayTotaler numberTotaler)
@@ -44,7 +43,7 @@ namespace StringCalculator
             if (HasCustomDelimiter(numbersToParse))
             {
                 delimitersToUse = GetCustomDelimiter(numbersToParse);
-                numbersToParse = GetNumbersFromStringWithDelimiter(numbersToParse);
+                numbersToParse = GetNumbersFromStringWithCustomDelimiter(numbersToParse);
             }
 
             return numbersToParse.Split(delimitersToUse.ToCharArray());
@@ -55,14 +54,15 @@ namespace StringCalculator
             return ",\n";
         }
 
-        private string GetNumbersFromStringWithDelimiter(string numbersToSum)
+        private string GetNumbersFromStringWithCustomDelimiter(string numbersToSum)
         {
-            return numbersToSum.Substring(_CUSTOM_DELIMITER_PLUS_ONE_INDEX);
+            return numbersToSum.Substring(numbersToSum.IndexOf('\n') + 1);
         }
 
         private string GetCustomDelimiter(string numbersToSum)
-        { 
-            return numbersToSum.Substring(1, 1);
+        {
+            var delimiterEndIndex = numbersToSum.IndexOf('\n');
+            return numbersToSum.Substring(1, (delimiterEndIndex - 1));
         }
 
         private bool HasCustomDelimiter(string numbersToSum)
