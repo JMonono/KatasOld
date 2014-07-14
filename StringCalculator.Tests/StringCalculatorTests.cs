@@ -6,7 +6,8 @@ namespace StringCalculator.Tests
     [TestClass]
     public class StringCalculatorTests
     {
-        private INumberArrayTotaler _defaultTotaler = new NumberArrayTotaler();
+        private INumberArrayTotaler _defaultTotaler =
+            new ValidatingNumberArrayTotaler(new NumberArrayTotaler());
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]

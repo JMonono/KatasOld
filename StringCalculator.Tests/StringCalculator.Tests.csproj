@@ -53,6 +53,7 @@
     <Compile Include="StringCalculatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NumberArrayTotalerTests.cs" />
+    <Compile Include="ValidatingNumberArrayTotalerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StringCalculator\StringCalculator.csproj">
